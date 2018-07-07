@@ -1,0 +1,13 @@
+
+pause.ogg  from "Coin GET" , by plasterbrain,  License: Creative Commons 0 , http://www.freesound.org/people/plasterbrain/sounds/242857
+
+player_win.ogg Remixed from "360617__robinhood76__06854-woman-yuppie-joy-voices.wav", by Robinhood76, https://freesound.org/people/Robinhood76/sounds/360617/
+
+player_lost_Life.ogg  from "Retro_Game_Sounds_SFX_31.wav" , by Jesús Lastra, https://opengameart.org/content/retro-game-sounds-volume-1
+
+heart_touch.ogg , from Blop, http://www.universal-soundbank.com/cartoons.htm
+
+player_heart.ogg from "rire de sorcière 04" "Rire de sorcière - maléfique - halloween", https://www.sound-fishing.net/bruitages_rires.html
+
+pnj_happy.ogg from "Bise - kiss 4", http://www.universal-soundbank.com/bisous.htm
+
