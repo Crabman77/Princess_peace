@@ -1,6 +1,6 @@
 # Princess peace
 ### A Simple 2d game writed in c++/SFML
-player control: arrow keys up,down,left,right and space
+player control: arrow keys left,right and space
 ### Compilation
 You must install SFML(2.5) -dev lib.
 
