@@ -16,7 +16,7 @@ Button::Button(sf::Texture texture, sf::Vector2f size, sf::Vector2f pixelPos, in
 	m_sprite.setTexture(m_texture);
 	for( int i = 0; i < 2; i++ )
 	{
-		m_anim.push_back(sf::IntRect(pixelPos.x+(m_size.x*i), pixelPos.y, m_size.x, m_size.y));
+		m_anim.push_back(sf::IntRect(static_cast<int>(pixelPos.x+(m_size.x*i)), static_cast<int>(pixelPos.y), static_cast<int>(m_size.x), static_cast<int>(m_size.y)) );
 	}
 	m_sprite.setTextureRect(m_anim[0]);
 	

@@ -15,14 +15,14 @@ Heart::Heart(const sf::Texture& texture)
 	m_sprite.setTexture(*m_texture);
 	for (long unsigned int i = 0; i < m_frame; i++ )
 	{
-		m_anim.push_back(sf::IntRect(i*m_size.x, 0, m_size.x, m_size.y));
+		m_anim.push_back(sf::IntRect(static_cast<int>(i*m_size.x), 0, static_cast<int>(m_size.x), static_cast<int>(m_size.y)) );
 	}
 
 	m_activeFrame = 0;
 	m_sprite.setTextureRect(m_anim[m_activeFrame]);
 	//m_sprite.setPosition(newPos);
-	m_sprite.setOrigin(sf::Vector2f(m_size.x/2, 0));
-	m_sprite.setScale(0.7, 0.7);
+	m_sprite.setOrigin(sf::Vector2f(m_size.x/2, 0.f));
+	m_sprite.setScale(0.7f, 0.7f);
 	m_speed = 180;
 	m_time = 0;
 	m_attached = true;

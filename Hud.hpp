@@ -39,16 +39,16 @@ public:
 	void updatetime(float elapsedTime);
 	void resetScore();
 	void resettime();
-	int getTime();
+	float getTime();
 	void setHighScore(long unsigned int levelNb);
-	void updateHighScore(long unsigned int levelNb);
+	void updateHighScore(long unsigned int levelNb, bool isGametimeAtttack);
 	void load();
 	void save();
 	
 private:
 	const sf::Texture* m_lifesTexture;
 	std::vector<sf::IntRect> m_anim;
-	sf::Vector2f m_size;
+	sf::Vector2i m_size;
 	
 	sf::Sprite m_lifesSprite;
 	sf::Text m_scoreText;

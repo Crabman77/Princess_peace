@@ -139,14 +139,14 @@ bool Engine::init()
 	m_winText.setCharacterSize(80);
 	m_winText.setString("Youpi");
 	m_winText.setOrigin(sf::Vector2f(m_winText.getLocalBounds().width/2, m_winText.getLocalBounds().height/2));
-	m_winText.setPosition( sf::Vector2f((m_windowSize.width/2), m_windowSize.height/2) );
+	m_winText.setPosition( sf::Vector2f(static_cast<float>(m_windowSize.width/2), static_cast<float>(m_windowSize.height/2)) );
 	
 	//text lost
 	m_lostText.setFont(m_font);
 	m_lostText.setCharacterSize(80);
 	m_lostText.setString("Perdu");
 	m_lostText.setOrigin(sf::Vector2f(m_lostText.getLocalBounds().width/2, m_lostText.getLocalBounds().height/2));
-	m_lostText.setPosition( sf::Vector2f((m_windowSize.width/2), m_windowSize.height/2) );
+	m_lostText.setPosition( sf::Vector2f(static_cast<float>(m_windowSize.width/2), static_cast<float>(m_windowSize.height/2)) );
 	
 
 	// menu selected
@@ -159,7 +159,7 @@ bool Engine::init()
 	m_pauseText.setCharacterSize(80);
 	m_pauseText.setString("PAUSE");
 	m_pauseText.setOrigin(sf::Vector2f(m_pauseText.getLocalBounds().width/2, m_pauseText.getLocalBounds().height/2));
-	m_pauseText.setPosition( sf::Vector2f((m_windowSize.width/2), m_windowSize.height/2) );
+	m_pauseText.setPosition( sf::Vector2f( static_cast<float>(m_windowSize.width/2), static_cast<float>(m_windowSize.height/2)) );
 	
 	// sound pause
 	if (!m_pauseBuffer.loadFromFile("sounds/pause.ogg"))
@@ -209,7 +209,7 @@ bool Engine::init()
 	}
 	m_pnjHappySound.setBuffer(m_pnjHappyBuffer);	
 	
-	sf::Listener::setPosition(m_windowSize.width/2, 0.f, 0.f);
+	sf::Listener::setPosition(static_cast<float>(m_windowSize.width/2), 0.f, 0.f);
 	sf::Listener::setDirection(0.f, 0.f, 1.f);
 	sf::Listener::setGlobalVolume(100.f);
 	sf::Listener::setUpVector(0.f, 1.f, 0.f);
@@ -223,11 +223,11 @@ bool Engine::init()
 	m_window.setFramerateLimit(60);
 	//m_window.setVerticalSyncEnabled(true);
 
-	srand(time(NULL));
+	srand(static_cast<unsigned int>(time(NULL)));
 
-	m_render.create(static_cast<unsigned int>(m_windowSize.width), static_cast<unsigned int>(m_windowSize.height));
-	m_view.setCenter(sf::Vector2f(m_windowSize.width/2, m_windowSize.height/2));
-	m_view.setSize(sf::Vector2f(m_windowSize.width, m_windowSize.height));
+	m_render.create(static_cast<unsigned int>(m_windowSize.width), static_cast<unsigned int>(m_windowSize.height) );
+	m_view.setCenter(sf::Vector2f(static_cast<float>(m_windowSize.width/2), static_cast<float>(m_windowSize.height/2) ));
+	m_view.setSize(sf::Vector2f(static_cast<float>(m_windowSize.width), static_cast<float>(m_windowSize.height) ));
 	m_window.setView(m_view);
 	
 	m_haveFocus = true;
@@ -258,7 +258,7 @@ void Engine::resize(unsigned int width, unsigned int height)
 	float nW = static_cast<float>(width) / static_cast<float>(m_windowSize.width);
 	float nH = static_cast<float>(height) / static_cast<float>(m_windowSize.height);
 	float scale = (nW < nH) ? nW : nH;
-	m_view.setSize(sf::Vector2f(width, height));
+	m_view.setSize(sf::Vector2f(static_cast<float>(width), static_cast<float>(height)));
 	m_view.zoom(1.f/scale);
 	m_window.setView(m_view);
 }
@@ -468,7 +468,7 @@ void Engine::game(long unsigned int levelNb)
 	
 	float playerPosY = m_levels[levelNb].playerPosY;
 	int pnjsNb = m_levels[levelNb].pnjsNb;
-	int pnjsHumorTimeout = m_levels[levelNb].pnjsHumorTimeout;
+	float pnjsHumorTimeout = m_levels[levelNb].pnjsHumorTimeout;
 	bool isGametimeAtttack = m_levels[levelNb].isGametimeAtttack;
 	
 	// menu
@@ -498,8 +498,9 @@ void Engine::game(long unsigned int levelNb)
 
 	for (int i = 0; i < pnjsNb; i++)
 	{
-		int x = rand()%((m_windowSize.width-100)+50);
-		pnjs.push_back(new Pnj(m_pnjTexture, sf::Vector2f(x, 668), isGametimeAtttack, 0, pnjsHumorTimeout, m_windowSize));
+		float x = static_cast<float>(rand()%((m_windowSize.width-100)+50));
+		float y = 668.0f;
+		pnjs.push_back(new Pnj(m_pnjTexture, sf::Vector2f(x, y), isGametimeAtttack, 0, pnjsHumorTimeout, m_windowSize));
 	}
 
 	while (ingame && m_window.isOpen())	
@@ -674,7 +675,6 @@ void Engine::game(long unsigned int levelNb)
 						if (m_hud->getLifes() < 0)
 						{
 							isLost = true;
-							m_hud->updateHighScore(levelNb);
 							break;
 						}
 					}
@@ -694,7 +694,7 @@ void Engine::game(long unsigned int levelNb)
 			{
 				isWin = true;
 				m_playerWinSound.play();
-				m_hud->updateHighScore(levelNb);
+				m_hud->updateHighScore(levelNb, isGametimeAtttack);
 			}
 		}
 		

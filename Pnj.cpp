@@ -14,7 +14,7 @@ Pnj::Pnj(const sf::Texture& texture,const sf::Vector2f pos, const bool isGametim
 	m_texture = &texture;
 	m_frame = 9;
 	m_size = sf::Vector2f(35, 64);
-	m_duration = 0.6;
+	m_duration = 0.6f;
 	isWalk = false;
 	m_activeFrame = 0;
 	m_time = 0;
@@ -28,11 +28,11 @@ Pnj::Pnj(const sf::Texture& texture,const sf::Vector2f pos, const bool isGametim
 	
 	for( long unsigned int i = 0; i < m_frame; i++ )
 	{
-		m_anim0.push_back(sf::IntRect(m_size.x*i, 0, m_size.x, m_size.y));
+		m_anim0.push_back(sf::IntRect(static_cast<int>(m_size.x*i), 0, static_cast<int>(m_size.x), static_cast<int>(m_size.y) ) );
 	}
 	for( long unsigned int i = 0; i < m_frame; i++ )
 	{
-		m_anim1.push_back(sf::IntRect(m_size.x*i, 64, m_size.x, m_size.y));
+		m_anim1.push_back(sf::IntRect(static_cast<int>(m_size.x*i), 64, static_cast<int>(m_size.x), static_cast<int>(m_size.y)) );
 	}
 	
 	m_sprite.setTextureRect(m_anim0[m_activeFrame]);
@@ -67,7 +67,7 @@ sf::Sprite Pnj::getSprite()
 
 void Pnj::setPosX(int pos)
 {
-	m_sprite.setPosition(sf::Vector2f(pos, 668));
+	m_sprite.setPosition(sf::Vector2f(static_cast<float>(pos), 668.f));
 }
 
 sf::Vector2f Pnj::getPos()

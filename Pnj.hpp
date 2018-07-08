@@ -13,7 +13,7 @@
 class Pnj
 {
 public:
-	Pnj(const sf::Texture& texture, const sf::Vector2f pos, const bool isGametimeAtttack, const int humor, const float humorTimeout, const sf::IntRect windowSize);
+	Pnj(const sf::Texture& texture, const sf::Vector2f pos, const bool isGametimeAtttack, const int humor, float humorTimeout, const sf::IntRect windowSize);
 	~Pnj();
 	
 	void reset();

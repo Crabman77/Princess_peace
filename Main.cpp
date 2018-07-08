@@ -8,7 +8,7 @@
 #include <iostream>
 #include "Engine.hpp"
 
-int main(int argc, char *argv[])
+int main()
 {
 	Engine engine;
 	if (!engine.init())

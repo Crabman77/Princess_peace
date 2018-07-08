@@ -12,26 +12,26 @@ Player::Player(const sf::Texture& texture,const sf::IntRect windowSize)
 	m_windowSize = windowSize;
 	m_texture = &texture;
 	m_frame = 1;
-	m_size = sf::Vector2f(128, 128);
-	m_duration = 2;
+	m_size = sf::Vector2f(128.f, 128.f);
+	m_duration = 2.f;
 	isAnimated = false;
 	m_activeFrame = 0;
-	m_time = 0;
-	m_speed = 240;
+	m_time = 0.f;
+	m_speed = 240.f;
 	m_haveHeart = false;
-	m_heartCooldown = 0.2;
+	m_heartCooldown = 0.2f;
 	m_sprite.setTexture(*m_texture);
 	
 	for( long unsigned int i = 0; i < m_frame; i++ )
 	{
-		m_anim.push_back(sf::IntRect(m_size.x*i, 0, m_size.x, m_size.y));
+		m_anim.push_back( sf::IntRect(static_cast<int>(m_size.x*i), 0, static_cast<int>(m_size.x), static_cast<int>(m_size.y)) );
 	}
 	
 	m_sprite.setTextureRect(m_anim[m_activeFrame]);
-	m_sprite.setOrigin(sf::Vector2f(m_size.x/2, m_size.y/2));
+	m_sprite.setOrigin( sf::Vector2f(static_cast<float>(m_size.x/2), static_cast<float>(m_size.y/2)) );
 	m_sprite.setRotation(0);
 	m_sprite.scale(0.5,0.5);
-	m_sprite.setPosition(sf::Vector2f(m_windowSize.width/2, 100));
+	m_sprite.setPosition(sf::Vector2f(static_cast<float>(m_windowSize.width/2), 100.f));
 }
 
 Player::~Player()
@@ -41,10 +41,10 @@ Player::~Player()
 
 void Player::reset()
 {
-	m_heartCooldown = 0.2;
+	m_heartCooldown = 0.2f;
 	m_haveHeart = false;
-	m_time = 0;
-	m_sprite.setPosition(sf::Vector2f(m_windowSize.width/2, m_sprite.getPosition().y));
+	m_time = 0.f;
+	m_sprite.setPosition(sf::Vector2f(static_cast<float>(m_windowSize.width/2), m_sprite.getPosition().y));
 }
 
 void Player::updateHeartCooldown(float elapsedTime)
@@ -54,7 +54,7 @@ void Player::updateHeartCooldown(float elapsedTime)
 
 bool Player::canHaveHeart() const
 {
-	return (m_heartCooldown <= 0);
+	return (m_heartCooldown <= 0.f);
 }
 
 void Player::setAttachHeart()
@@ -64,7 +64,7 @@ void Player::setAttachHeart()
 
 void Player::setDettachHeart()
 {
-	m_heartCooldown = 1.6;
+	m_heartCooldown = 1.6f;
 	m_haveHeart = false;
 }
 

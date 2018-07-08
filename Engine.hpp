@@ -26,7 +26,7 @@ struct level
 {
 	float playerPosY;
 	int pnjsNb;
-	int pnjsHumorTimeout;
+	float pnjsHumorTimeout;
 	bool isGametimeAtttack;
 };
 

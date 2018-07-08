@@ -26,16 +26,16 @@ Hud::Hud(sf::Font& font, sf::Texture& lifesTexture)
 	m_lifesTime = 0;
 	m_lifes = 3;
 	m_lifesTexture = &lifesTexture;
-	m_size = sf::Vector2f(96, 32);
-	m_anim.push_back(sf::IntRect(0, 0, m_size.x, m_size.y));
-	m_anim.push_back(sf::IntRect(0, 32, m_size.x, m_size.y));
-	m_anim.push_back(sf::IntRect(0, 64, m_size.x, m_size.y));
-	m_anim.push_back(sf::IntRect(0, 96, m_size.x, m_size.y));
+	m_size = sf::Vector2i(96, 32);
+	m_anim.push_back( sf::IntRect(0, 0, m_size.x, m_size.y) );
+	m_anim.push_back( sf::IntRect(0, 32, m_size.x, m_size.y) );
+	m_anim.push_back( sf::IntRect(0, 64, m_size.x, m_size.y) );
+	m_anim.push_back( sf::IntRect(0, 96, m_size.x, m_size.y) );
 	
 	m_lifesSprite.setTexture(*m_lifesTexture);
 	m_lifesSprite.setTextureRect(m_anim[3]);
-	m_lifesSprite.setOrigin(sf::Vector2f(0, 0));
-	m_lifesSprite.setPosition(sf::Vector2f(10, 5));
+	m_lifesSprite.setOrigin(sf::Vector2f(0.f, 0.f));
+	m_lifesSprite.setPosition(sf::Vector2f(10.f, 5.f));
 	
 	//score
 	m_score = 0;
@@ -173,7 +173,7 @@ void Hud::resettime()
 	m_time = 0;
 }
 
-int Hud::getTime()
+float Hud::getTime()
 {
 	return (m_time);
 }
@@ -186,15 +186,29 @@ void Hud::setHighScore(long unsigned int levelNb)
 }
 
 
-void Hud::updateHighScore(long unsigned int levelNb)
+void Hud::updateHighScore(long unsigned int levelNb, bool isGametimeAtttack)
 {
-	if (m_score > m_highScore || m_time > m_highTime)
+	if (isGametimeAtttack)
 	{
-		m_highScore = m_score;
-		m_highTime = m_time;
-		m_highScores[levelNb].highScore = m_score;
-		m_highScores[levelNb].highTime = m_time;
-		save();
+		if (m_highTime == 0 || static_cast<int>(m_time) < m_highTime)
+		{
+			m_highScore = m_score;
+			m_highTime = static_cast<int>(m_time);
+			m_highScores[levelNb].highScore = m_highScore;
+			m_highScores[levelNb].highTime = m_highTime;
+			save();
+		}
+	}
+	else
+	{
+		if (m_score > m_highScore)
+		{
+			m_highScore = m_score;
+			m_highTime = static_cast<int>(m_time);
+			m_highScores[levelNb].highScore = m_highScore;
+			m_highScores[levelNb].highTime = m_highTime;
+			save();
+		}
 	}
 }
 
